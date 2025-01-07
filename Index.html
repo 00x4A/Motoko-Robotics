@@ -7,19 +7,19 @@
     <style>
         body {
             background-color: white;
-            color: white;
+            color: black;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             overflow: hidden; /* Prevent scrollbars from appearing */
         }
         header {
-            background-color: #333;
+            background-color: #f0f0f0;
             padding: 20px;
             text-align: center;
         }
         h1, h2 {
-            color: white;
+            color: black;
         }
         .content {
             padding: 20px;
@@ -28,8 +28,8 @@
             margin-bottom: 20px;
         }
         footer {
-            background-color: #333;
-            color: white;
+            background-color: #f0f0f0;
+            color: black;
             text-align: center;
             padding: 10px;
             position: fixed;
@@ -41,22 +41,19 @@
             position: absolute;
             width: 0;
             height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-bottom: 35px solid white;
-            opacity: 0.7;
-            animation: moveTriangle 3s ease-in-out infinite;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 25px solid grey; /* Grey triangles */
+            opacity: 0.8;
+            animation: floatAway 5s ease-in-out infinite;
         }
 
-        @keyframes moveTriangle {
+        @keyframes floatAway {
             0% {
-                transform: translate(0, 0);
-            }
-            50% {
                 transform: translate(var(--x), var(--y));
             }
             100% {
-                transform: translate(0, 0);
+                transform: translate(var(--x), var(--y)) translateY(-2000px) scale(0.5); /* Floating away */
             }
         }
     </style>
@@ -111,11 +108,11 @@
             // Remove the triangle after animation ends
             setTimeout(() => {
                 triangle.remove();
-            }, 3000); // duration matches the animation duration
+            }, 5000); // duration matches the animation duration
         }
 
-        // Create a new triangle every 500ms
-        setInterval(createTriangle, 500);
+        // Create a new triangle every 300ms
+        setInterval(createTriangle, 300);
     </script>
 </body>
 </html>
