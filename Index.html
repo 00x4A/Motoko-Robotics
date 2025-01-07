@@ -5,38 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MS - Mobile Gaming and Robotics</title>
     <style>
+        /* Global styles */
         body {
             background-color: white;
             color: black;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            perspective: 1000px; /* Enable 3D perspective for the body */
+            perspective: 1000px; /* Enable 3D perspective */
+            overflow: hidden; /* Hide scrollbars to prevent overflow from triangles */
+            height: 100vh; /* Ensure body takes full height */
         }
+
+        /* Header */
         header {
             background-color: #f0f0f0;
             padding: 20px;
             text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
+
         h1, h2 {
             color: black;
+            margin: 0;
         }
+
+        /* Content area */
         .content {
             padding: 20px;
+            margin-bottom: 100px; /* Allow space for footer */
+            box-sizing: border-box;
         }
+
         .phase {
             margin-bottom: 20px;
         }
+
+        /* Footer */
         footer {
             background-color: #f0f0f0;
             color: black;
             text-align: center;
             padding: 10px;
-            position: fixed;
+            position: absolute;
             width: 100%;
             bottom: 0;
         }
 
+        /* Triangle styles */
         .triangle {
             position: absolute;
             width: 0;
@@ -49,6 +66,7 @@
             transform-origin: center;
         }
 
+        /* 3D floating triangle animation */
         @keyframes floatAway {
             0% {
                 transform: 
@@ -64,6 +82,28 @@
                     rotateY(var(--rotateYFinal)) 
                     rotateZ(var(--rotateZFinal)) 
                     translateY(-2000px) scale(0.5);
+            }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            header {
+                font-size: 1.2rem;
+            }
+
+            .content {
+                padding: 10px;
+            }
+        }
+
+        /* For mobile devices, making sure content scales properly */
+        @media (max-width: 480px) {
+            header {
+                font-size: 1rem;
+            }
+
+            .content {
+                padding: 5px;
             }
         }
     </style>
@@ -127,8 +167,8 @@
             triangle.style.setProperty('--rotateY', `${rotateY}deg`);
             triangle.style.setProperty('--rotateZ', `${rotateZ}deg`);
             triangle.style.setProperty('--rotateXFinal', `${rotateXFinal}deg`);
-            triangle.style.setProperty('--rotateYFinal', `${rotateYFinal}deg`);
-            triangle.style.setProperty('--rotateZFinal', `${rotateZFinal}deg`);
+            triangle.style.setProperty('--rotateYFinal`, `${rotateYFinal}deg`);
+            triangle.style.setProperty('--rotateZFinal`, `${rotateZFinal}deg`);
 
             document.body.appendChild(triangle);
 
