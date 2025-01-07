@@ -15,6 +15,7 @@
             perspective: 1000px; /* Enable 3D perspective */
             overflow: hidden; /* Hide scrollbars */
             height: 100vh; /* Ensure body takes full height */
+            position: relative;
         }
 
         /* Input box styling */
@@ -88,35 +89,31 @@
             border-top: 2px solid #000000;  /* Border for footer */
         }
 
-        /* Triangle styles */
-        .triangle {
+        /* Matrix-like falling letters */
+        .matrix {
             position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-bottom: 25px solid #808080; /* Grey triangles */
-            opacity: 0.8;
-            animation: floatAway 5s ease-in-out infinite;
-            transform-origin: center;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            white-space: nowrap;
+            z-index: 1000; /* Make sure it's above other content */
+            font-size: 20px;
+            color: rgba(0, 255, 0, 0.7); /* Matrix green color */
+            font-family: 'Courier New', monospace;
         }
 
-        /* 3D floating triangle animation */
-        @keyframes floatAway {
+        .matrix span {
+            animation: fall 3s linear infinite;
+            position: absolute;
+        }
+
+        /* Falling animation for matrix */
+        @keyframes fall {
             0% {
-                transform: 
-                    translate3d(var(--x), var(--y), var(--z)) 
-                    rotateX(var(--rotateX)) 
-                    rotateY(var(--rotateY)) 
-                    rotateZ(var(--rotateZ));
+                top: -100px;
             }
             100% {
-                transform: 
-                    translate3d(var(--x), var(--y), var(--z))
-                    rotateX(var(--rotateXFinal)) 
-                    rotateY(var(--rotateYFinal)) 
-                    rotateZ(var(--rotateZFinal)) 
-                    translateY(-2000px) scale(0.5);
+                top: 100vh;
             }
         }
 
@@ -197,6 +194,8 @@
         <p>&copy; 2025 MS Mobile Gaming & Robotics. All rights reserved.</p>
     </footer>
 
+    <div class="matrix" id="matrix"></div>
+
     <script>
         // Function to update the greeting with user's name
         const nameInput = document.getElementById('nameInput');
@@ -205,52 +204,31 @@
         nameInput.addEventListener('input', function() {
             const name = nameInput.value.trim();
             if (name) {
-                greeting.textContent = `Hello, ${name}!`;
+                greeting.textContent = `welcome, ${name}!`;
             } else {
                 greeting.textContent = ''; // Clear greeting if input is empty
             }
         });
 
-        // Function to generate random positions for the triangles
-        function createTriangle() {
-            const triangle = document.createElement('div');
-            triangle.classList.add('triangle');
+        // Matrix effect
+        const matrix = document.getElementById('matrix');
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()';
+        
+        function createMatrix() {
+            const span = document.createElement('span');
+            const randomChar = chars[Math.floor(Math.random() * chars.length)];
+            span.textContent = randomChar;
+            span.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+            matrix.appendChild(span);
 
-            // Generate random position for X, Y, and Z axis
-            const x = Math.random() * window.innerWidth - window.innerWidth / 2;
-            const y = Math.random() * window.innerHeight - window.innerHeight / 2;
-            const z = Math.random() * 500 - 250;  // Random Z position for 3D depth
-
-            // Generate random rotation for each axis
-            const rotateX = Math.random() * 360;
-            const rotateY = Math.random() * 360;
-            const rotateZ = Math.random() * 360;
-
-            const rotateXFinal = Math.random() * 360;
-            const rotateYFinal = Math.random() * 360;
-            const rotateZFinal = Math.random() * 360;
-
-            // Set custom properties for animation
-            triangle.style.setProperty('--x', `${x}px`);
-            triangle.style.setProperty('--y', `${y}px`);
-            triangle.style.setProperty('--z', `${z}px`);
-            triangle.style.setProperty('--rotateX', `${rotateX}deg`);
-            triangle.style.setProperty('--rotateY', `${rotateY}deg`);
-            triangle.style.setProperty('--rotateZ', `${rotateZ}deg`);
-            triangle.style.setProperty('--rotateXFinal', `${rotateXFinal}deg`);
-            triangle.style.setProperty('--rotateYFinal', `${rotateYFinal}deg`);
-            triangle.style.setProperty('--rotateZFinal', `${rotateZFinal}deg`);
-
-            document.body.appendChild(triangle);
-
-            // Remove the triangle after animation ends
+            // Remove the span after animation to keep the effect smooth
             setTimeout(() => {
-                triangle.remove();
-            }, 5000); // duration matches the animation duration
+                span.remove();
+            }, 3000); // Match the animation duration
         }
 
-        // Create a new triangle every 300ms
-        setInterval(createTriangle, 300);
+        // Create new "falling" characters every 100ms
+        setInterval(createMatrix, 100);
     </script>
 </body>
 </html>
