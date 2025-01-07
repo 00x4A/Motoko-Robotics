@@ -90,6 +90,34 @@
             }
         }
 
+        /* Input box styling */
+        #nameInput {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            background-color: #2d2d2d;
+            color: #00FF00;
+            border: 2px solid #00FF00;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        #nameInput:focus {
+            border-color: #00FF00;
+        }
+
+        #greeting {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            font-size: 18px;
+            color: #00FF00;
+            font-family: 'Courier New', monospace;
+        }
+
         /* Responsive styles */
         @media (max-width: 768px) {
             header {
@@ -98,6 +126,14 @@
 
             .content {
                 padding: 10px;
+            }
+
+            #nameInput {
+                font-size: 14px;
+            }
+
+            #greeting {
+                font-size: 16px;
             }
         }
 
@@ -110,6 +146,14 @@
             .content {
                 padding: 5px;
             }
+
+            #nameInput {
+                font-size: 12px;
+            }
+
+            #greeting {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -117,6 +161,7 @@
     <header>
         <h1>MS: Mobile Gaming and Robotics</h1>
     </header>
+
     <div class="content">
         <p>MS is a mobile gaming and robotics company featuring in-app customizable virtual AI avatars or pets, Augmented Reality (AR) integrations, and small physical robots.</p>
         
@@ -140,11 +185,29 @@
             <p>Roadmap to be announced.</p>
         </div>
     </div>
+
     <footer>
         <p>&copy; 2025 MS Mobile Gaming & Robotics. All rights reserved.</p>
     </footer>
 
+    <!-- Name input and greeting display -->
+    <input type="text" id="nameInput" placeholder="Enter your name" />
+    <div id="greeting"></div>
+
     <script>
+        // Function to update the greeting with user's name
+        const nameInput = document.getElementById('nameInput');
+        const greeting = document.getElementById('greeting');
+
+        nameInput.addEventListener('input', function() {
+            const name = nameInput.value.trim();
+            if (name) {
+                greeting.textContent = `Hello, ${name}!`;
+            } else {
+                greeting.textContent = ''; // Clear greeting if input is empty
+            }
+        });
+
         // Function to generate random positions for the triangles
         function createTriangle() {
             const triangle = document.createElement('div');
