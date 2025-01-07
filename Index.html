@@ -11,6 +11,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            overflow: hidden; /* Prevent scrollbars from appearing */
         }
         header {
             background-color: #333;
@@ -34,6 +35,29 @@
             position: fixed;
             width: 100%;
             bottom: 0;
+        }
+
+        .triangle {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 35px solid white;
+            opacity: 0.7;
+            animation: moveTriangle 3s ease-in-out infinite;
+        }
+
+        @keyframes moveTriangle {
+            0% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(var(--x), var(--y));
+            }
+            100% {
+                transform: translate(0, 0);
+            }
         }
     </style>
 </head>
@@ -67,6 +91,31 @@
     <footer>
         <p>&copy; 2025 MS Mobile Gaming & Robotics. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Function to generate random positions for the triangles
+        function createTriangle() {
+            const triangle = document.createElement('div');
+            triangle.classList.add('triangle');
+
+            // Generate random position
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+
+            // Set custom properties for animation
+            triangle.style.setProperty('--x', `${x - window.innerWidth / 2}px`);
+            triangle.style.setProperty('--y', `${y - window.innerHeight / 2}px`);
+
+            document.body.appendChild(triangle);
+
+            // Remove the triangle after animation ends
+            setTimeout(() => {
+                triangle.remove();
+            }, 3000); // duration matches the animation duration
+        }
+
+        // Create a new triangle every 500ms
+        setInterval(createTriangle, 500);
+    </script>
 </body>
 </html>
-
