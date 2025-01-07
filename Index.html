@@ -7,9 +7,9 @@
     <style>
         /* Global styles */
         body {
-            background-color: white;
-            color: black;
-            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;  /* Dark background like terminal */
+            color: #00FF00;  /* Green text color for terminal look */
+            font-family: 'Courier New', monospace;  /* Monospace font for terminal effect */
             margin: 0;
             padding: 0;
             perspective: 1000px; /* Enable 3D perspective */
@@ -17,40 +17,45 @@
             height: 100vh; /* Ensure body takes full height */
         }
 
-        /* Header */
+        /* Header styling for terminal look */
         header {
-            background-color: #f0f0f0;
+            background-color: #2d2d2d;
             padding: 20px;
             text-align: center;
             font-size: 1.5rem;
             font-weight: bold;
+            border-bottom: 2px solid #00FF00;  /* Green border like terminal line */
         }
 
         h1, h2 {
-            color: black;
+            color: #00FF00;  /* Green text for header */
             margin: 0;
         }
 
-        /* Content area */
+        /* Content area with schematic appearance */
         .content {
             padding: 20px;
             margin-bottom: 100px; /* Allow space for footer */
             box-sizing: border-box;
+            border-left: 2px dashed #00FF00; /* Schematic-like dashed line */
+            border-right: 2px dashed #00FF00;
+            border-top: 2px solid #00FF00; /* Terminal-style border */
         }
 
         .phase {
             margin-bottom: 20px;
         }
 
-        /* Footer */
+        /* Footer with terminal theme */
         footer {
-            background-color: #f0f0f0;
-            color: black;
+            background-color: #2d2d2d;
+            color: #00FF00;
             text-align: center;
             padding: 10px;
             position: absolute;
             width: 100%;
             bottom: 0;
+            border-top: 2px solid #00FF00;  /* Green border like terminal line */
         }
 
         /* Triangle styles */
@@ -60,7 +65,7 @@
             height: 0;
             border-left: 15px solid transparent;
             border-right: 15px solid transparent;
-            border-bottom: 25px solid grey; /* Grey triangles */
+            border-bottom: 25px solid #808080; /* Grey triangles */
             opacity: 0.8;
             animation: floatAway 5s ease-in-out infinite;
             transform-origin: center;
@@ -162,7 +167,7 @@
             // Set custom properties for animation
             triangle.style.setProperty('--x', `${x}px`);
             triangle.style.setProperty('--y', `${y}px`);
-            triangle.style.setProperty('--z`, `${z}px`);
+            triangle.style.setProperty('--z', `${z}px`);
             triangle.style.setProperty('--rotateX', `${rotateX}deg`);
             triangle.style.setProperty('--rotateY', `${rotateY}deg`);
             triangle.style.setProperty('--rotateZ', `${rotateZ}deg`);
