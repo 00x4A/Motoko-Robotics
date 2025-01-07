@@ -7,39 +7,69 @@
     <style>
         /* Global styles */
         body {
-            background-color: white;  /* Dark background like terminal */
-            color: black;  /* Green text color for terminal look */
-            font-family: 'Courier New', monospace;  /* Monospace font for terminal effect */
+            background-color: #ffffff;  /* White background */
+            color: #000000;  /* Black text */
+            font-family: 'Courier New', monospace;  /* Monospace font */
             margin: 0;
             padding: 0;
             perspective: 1000px; /* Enable 3D perspective */
-            overflow: hidden; /* Hide scrollbars to prevent overflow from triangles */
+            overflow: hidden; /* Hide scrollbars */
             height: 100vh; /* Ensure body takes full height */
+        }
+
+        /* Input box styling */
+        #nameInput {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            background-color: #000000;
+            color: #ffffff;
+            border: 2px solid #000000;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        #nameInput:focus {
+            border-color: #00FF00;
+        }
+
+        #greeting {
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            font-size: 18px;
+            color: #000000;
+            font-family: 'Courier New', monospace;
         }
 
         /* Header styling for terminal look */
         header {
-            background-color: #2d2d2d;
-            padding: 20px;
+            background-color: #ffffff;
+            color: #000000;
             text-align: center;
             font-size: 1.5rem;
             font-weight: bold;
-            border-bottom: 2px solid #00FF00;  /* Green border like terminal line */
+            border-top: 2px solid #000000;  /* Border for header */
+            padding: 20px;
+            margin-top: 100px; /* Move header below input box */
         }
 
         h1, h2 {
-            color: #00FF00;  /* Green text for header */
+            color: #000000;  /* Black text for header */
             margin: 0;
         }
 
         /* Content area with schematic appearance */
         .content {
             padding: 20px;
-            margin-bottom: 100px; /* Allow space for footer */
+            margin-top: 20px; /* Allow space below the header */
             box-sizing: border-box;
-            border-left: 2px dashed #00FF00; /* Schematic-like dashed line */
-            border-right: 2px dashed #00FF00;
-            border-top: 2px solid #00FF00; /* Terminal-style border */
+            border-left: 2px dashed #000000; /* Schematic-like dashed line */
+            border-right: 2px dashed #000000;
+            border-top: 2px solid #000000; /* Border for content */
         }
 
         .phase {
@@ -48,14 +78,14 @@
 
         /* Footer with terminal theme */
         footer {
-            background-color: #2d2d2d;
-            color: #00FF00;
+            background-color: #ffffff;
+            color: #000000;
             text-align: center;
             padding: 10px;
             position: absolute;
             width: 100%;
             bottom: 0;
-            border-top: 2px solid #00FF00;  /* Green border like terminal line */
+            border-top: 2px solid #000000;  /* Border for footer */
         }
 
         /* Triangle styles */
@@ -88,34 +118,6 @@
                     rotateZ(var(--rotateZFinal)) 
                     translateY(-2000px) scale(0.5);
             }
-        }
-
-        /* Input box styling */
-        #nameInput {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 8px;
-            font-family: 'Courier New', monospace;
-            font-size: 16px;
-            background-color: #2d2d2d;
-            color: #00FF00;
-            border: 2px solid #00FF00;
-            border-radius: 4px;
-            outline: none;
-        }
-
-        #nameInput:focus {
-            border-color: #00FF00;
-        }
-
-        #greeting {
-            position: fixed;
-            top: 70px;
-            right: 20px;
-            font-size: 18px;
-            color: #00FF00;
-            font-family: 'Courier New', monospace;
         }
 
         /* Responsive styles */
@@ -158,6 +160,11 @@
     </style>
 </head>
 <body>
+    <!-- Name input and greeting display -->
+    <input type="text" id="nameInput" placeholder="Enter your name" />
+    <div id="greeting"></div>
+
+    <!-- Header (now below the input box) -->
     <header>
         <h1>MS: Mobile Gaming and Robotics</h1>
     </header>
@@ -189,10 +196,6 @@
     <footer>
         <p>&copy; 2025 MS Mobile Gaming & Robotics. All rights reserved.</p>
     </footer>
-
-    <!-- Name input and greeting display -->
-    <input type="text" id="nameInput" placeholder="Enter your name" />
-    <div id="greeting"></div>
 
     <script>
         // Function to update the greeting with user's name
